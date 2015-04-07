@@ -3,6 +3,7 @@
        "totalTime": 100,
     "extraTime": 10,
     "weekendTime": 20,
+    "NomalTime":0,
     "monthlist": [
       {
         "workStart": "9:00",
@@ -24,6 +25,7 @@
       "totalTime": 100,
     "extraTime": 10,
     "weekendTime": 20,
+    "NomalTime":20,
     "monthlist": [
       {
         "workStart": "9:00",
