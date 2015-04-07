@@ -35,8 +35,11 @@ _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/*/
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
+
+import sun.util.calendar.BaseCalendar.Date;
 
 public class KtHoliday{
 
@@ -56,6 +59,25 @@ public class KtHoliday{
     private static final  Calendar cstImplementHoliday
         = new GregorianCalendar( 1973, Calendar.APRIL, 12 );     // 振替休日施行
 
+	public static boolean getWeekend(String date) {
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd");     
+		Calendar cal = Calendar.getInstance();
+		java.util.Date bdate = null;
+		  try {  
+		        bdate = format.parse(date);  
+		    } catch (ParseException e) {  
+		        e.printStackTrace();  
+		    } 
+		cal.setTime(bdate);
+		if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY
+				|| cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+			// System.out.println("是周末");
+			return true;
+		} else {
+			// System.out.println("不是周末！");
+			return false;
+		}
+	}
     // [prmDate]には "yyyy/m/d"形式の日付文字列を渡す
     public static String getHolidayName( String prmDate ) throws ParseException
     {
@@ -344,6 +366,6 @@ public class KtHoliday{
         }
         return AutumnEquinox_ret;
     }
-
+ 
 }
 
