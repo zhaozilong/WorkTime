@@ -105,6 +105,10 @@ public class JsonParse {
 
 			JSONObject jsonObject = new JSONObject(json);
 			JSONObject jsonMonth = jsonObject.getJSONObject(month);
+			//時間の単位と深夜の時間
+			int workUnit = jsonObject.getInt("timeUnit");
+			String nightStart = jsonObject.getString("nightStart");
+			String nightEnd = jsonObject.getString("nightEnd");
 			JSONArray jsonDayArray = jsonMonth.getJSONArray("monthlist");
 			boolean changed = true;
 			for (int i = 0; i < jsonDayArray.length(); i++) {
