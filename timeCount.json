@@ -1,9 +1,13 @@
-{
+{"workid":1,
+ "workName":"NSW",
+ "commuteFee":0,
+ "nightStart":"22:00",
+ "nightEnd":"6:00",
   "201503": {
-       "totalTime": 100,
+    "totalTime": 100,
+    "NomalTime": 0,
     "extraTime": 10,
     "weekendTime": 20,
-    "NomalTime":0,
     "monthlist": [
       {
         "workStart": "9:00",
@@ -22,10 +26,10 @@
     ]
   },
   "201504": {
-      "totalTime": 100,
-    "extraTime": 10,
-    "weekendTime": 20,
-    "NomalTime":20,
+    "totalTime": 32,
+    "NomalTime": 24,
+    "extraTime": 0,
+    "weekendTime": 8,
     "monthlist": [
       {
         "workStart": "9:00",
@@ -44,6 +48,13 @@
       {
         "workStart": "9:00",
         "workDay": "2015-04-06",
+        "workEnd": "18:00",
+        "workTime": 8,
+        "salaryUp": 0
+      },
+      {
+        "workStart": "9:00",
+        "workDay": "2015-04-04",
         "workEnd": "18:00",
         "workTime": 8,
         "salaryUp": 0
