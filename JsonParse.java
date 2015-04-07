@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.util.ArrayList;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -26,7 +28,7 @@ public class JsonParse {
 		 // jsonデータの作成
         JSONObject jsonOneData = new JSONObject();
         try {
-			jsonOneData.put("workDay", "2015-04-06");
+			jsonOneData.put("workDay", "2015-04-04");
 	        jsonOneData.put("workStart", "9:00");
 	        jsonOneData.put("workEnd", "18:00");
 	        jsonOneData.put("workTime", 8);
@@ -37,7 +39,12 @@ public class JsonParse {
 		}
 
 		
-		writeJson(DateAddress,month,jsonOneData);
+		try {
+			writeJson(DateAddress,month,jsonOneData);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -78,7 +85,7 @@ public class JsonParse {
 		}
 		return null;
 	}
-	public static void writeJson(String fileAddress,String month,JSONObject jsonDayData) throws IOException
+	public static void writeJson(String fileAddress,String month,JSONObject jsonDayData) throws IOException, ParseException
 	{
 		/*
 		 * 1.DATAのファイルに月に対応するデータがあるかどうか判断する
@@ -117,8 +124,33 @@ public class JsonParse {
 			}
 			/*勤務時間(totalTime):今月の全部勤務時間
 			 *　祝日、週末(weekendTime):週末と祝日の勤務時間
-			 *深夜時間(extraTome):夜10：００以後の勤務時間
+			 *深夜時間(extraTime):夜10：００以後の勤務時間
+			 *理論労働時間(Nomaltime):８＊平日
 			 */
+			int totalTime = 0;
+			int weekendTime = 0;
+			int extraTime = 0;
+			int nomalTime = 0;
+			for (int i = 0; i < jsonDayArray.length(); i++) {
+				JSONObject jsonDay = jsonDayArray.getJSONObject(i);
+				totalTime += jsonDay.getInt("workTime");
+				extraTime += jsonDay.getInt("salaryUp");
+				String workDay = jsonDay.getString("workDay");
+				String[] tempDay = workDay.split("-");
+
+				workDay = tempDay[0]+"/"+tempDay[1]+"/"+tempDay[2].toString(); 				
+				if(KtHoliday.getHolidayName(workDay)!=""||KtHoliday.getWeekend(jsonDay.getString("workDay")))
+				{
+					weekendTime +=jsonDay.getInt("workTime");
+				}else
+				{
+					nomalTime += 8;
+				}
+			}
+			jsonMonth.put("totalTime",totalTime);
+			jsonMonth.put("weekendTime",weekendTime);
+			jsonMonth.put("extraTime",extraTime);
+			jsonMonth.put("NomalTime",nomalTime);
 			FileWriter filewriter;
 
 			filewriter = new FileWriter(fileAddress);
