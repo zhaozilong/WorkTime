@@ -1,46 +1,51 @@
 {
   "201503": {
+       "totalTime": 100,
+    "extraTime": 10,
+    "weekendTime": 20,
     "monthlist": [
       {
-        "workDay": "2015-03-07",
         "workStart": "9:00",
+        "workDay": "2015-03-07",
         "workEnd": "18:00",
         "workTime": 8,
         "salaryUp": 0
       },
       {
-        "workDay": "2015-03-08",
         "workStart": "9:00",
+        "workDay": "2015-03-08",
         "workEnd": "18:00",
         "workTime": 8,
         "salaryUp": 0
       }
-    ],
-    "totalTime": 100,
-    "extraTime": 10,
-    "unnormoalTime": 10,
-    "weekendTime": 20
+    ]
   },
   "201504": {
+      "totalTime": 100,
+    "extraTime": 10,
+    "weekendTime": 20,
     "monthlist": [
       {
-        "workDay": "2015-04-07",
         "workStart": "9:00",
+        "workDay": "2015-04-07",
         "workEnd": "18:00",
         "workTime": 8,
         "salaryUp": 0
       },
       {
-        "workDay": "2015-04-08",
         "workStart": "9:00",
+        "workDay": "2015-04-08",
+        "workEnd": "18:00",
+        "workTime": 8,
+        "salaryUp": 0
+      },
+      {
+        "workStart": "9:00",
+        "workDay": "2015-04-06",
         "workEnd": "18:00",
         "workTime": 8,
         "salaryUp": 0
       }
-    ],
-    "totalTime": 100,
-    "extraTime": 10,
-    "unnormoalTime": 10,
-    "weekendTime": 20
+    ]
   }
 }
