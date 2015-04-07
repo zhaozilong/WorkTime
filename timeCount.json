@@ -1,6 +1,7 @@
 {"workid":1,
  "workName":"NSW",
  "commuteFee":0,
+ "timeUnit":15,
  "nightStart":"22:00",
  "nightEnd":"6:00",
   "201503": {
