@@ -1,9 +1,4 @@
-{"workid":1,
- "workName":"NSW",
- "commuteFee":0,
- "timeUnit":15,
- "nightStart":"22:00",
- "nightEnd":"6:00",
+{
   "201503": {
     "totalTime": 100,
     "NomalTime": 0,
@@ -37,7 +32,22 @@
         "workDay": "2015-04-07",
         "workEnd": "18:00",
         "workTime": 8,
-        "salaryUp": 0
+        "salaryUp": 0,
+        "restCount": 2,
+        "restTimeList": [
+          {
+            "start1": "12:00"
+          },
+          {
+            "end1": "14:00"
+          },
+          {
+            "strat2": "18:00"
+          },
+          {
+            "end2": "18:30"
+          }
+        ]
       },
       {
         "workStart": "9:00",
@@ -61,5 +71,11 @@
         "salaryUp": 0
       }
     ]
-  }
+  },
+  "nightStart": "22:00",
+  "nightEnd": "6:00",
+  "workName": "NSW",
+  "workid": 1,
+  "commuteFee": 0,
+  "timeUnit": 15
 }
