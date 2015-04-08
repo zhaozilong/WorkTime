@@ -366,6 +366,21 @@ public class KtHoliday{
         }
         return AutumnEquinox_ret;
     }
- 
+    /**
+     * @param startTime
+     * @param endTime
+     * @return 仕事時間
+     */
+    public static double calTime(String startTime,String endTime,int timeUnit){
+    	double hours = Integer.parseInt(endTime.split(":")[0])-Integer.parseInt(startTime.split(":")[0]);
+    	double minEnd = Integer.parseInt(endTime.split(":")[1])/timeUnit;
+    	double minStart = Integer.parseInt(startTime.split(":")[1])/timeUnit;
+    	if(Integer.parseInt(startTime.split(":")[1])%timeUnit >0)
+    	{
+    		minStart += 1;
+    	}
+		return hours+((minEnd -minStart)/(60/timeUnit));
+    	
+    }
 }
 
