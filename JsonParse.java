@@ -21,6 +21,7 @@ import weibo4j.org.json.JSONObject;
 
 public class JsonParse {
 
+	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		String DateAddress = "src/month.json";
@@ -85,9 +86,10 @@ public class JsonParse {
 		}
 		return null;
 	}
+	
 	public static void writeJson(String fileAddress,String month,JSONObject jsonDayData) throws IOException, ParseException
 	{
-		/*
+		/* 時間登録と変更する時
 		 * 1.DATAのファイルに月に対応するデータがあるかどうか判断する
 		 * 2．ない場合、JSONデータを追加前、月のデータを組む合わせる。
 		 * 3．ある場合、JSONデータを追加して、月のデータを計算する。
@@ -170,5 +172,45 @@ public class JsonParse {
 
 	}
 
+	/**
+	 * @param work
+	 * @param fileAddress
+	 * jsonファイルが無いとき、作る
+	 */
+	public static void fileCreate(WorkEntry work, String fileAddress) {
+		int workId = work.getWorkId();
+		int commuteFee = work.getCommunteFee();
+		int timeUnit = work.getTimeUnit();
+		String workName = work.getWorkName();
+		String nightStart = work.getNightStart();
+		String nightEnd = work.getNightEnd();
+		fileAddress = fileAddress + work.getWorkId() + ".json";
+		File file = new File(fileAddress);
+		if (!file.exists()) {
+			JSONObject jsonOneData = new JSONObject();
+			try {
+				jsonOneData.put("workId", workId);
+				jsonOneData.put("workName", workName);
+				jsonOneData.put("commuteFee", commuteFee);
+				jsonOneData.put("nightStart", nightStart);
+				jsonOneData.put("nightEnd", nightEnd);
+
+				FileWriter filewriter;
+				try {
+					filewriter = new FileWriter(fileAddress);
+					BufferedWriter bw = new BufferedWriter(filewriter);
+					PrintWriter pw = new PrintWriter(bw);
+					pw.write(jsonOneData.toString());
+					pw.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
 
