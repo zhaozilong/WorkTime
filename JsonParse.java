@@ -29,11 +29,12 @@ public class JsonParse {
 		 // jsonデータの作成
         JSONObject jsonOneData = new JSONObject();
         try {
-			jsonOneData.put("workDay", "2015-04-04");
+			jsonOneData.put("workDay", "2015-04-03");
 	        jsonOneData.put("workStart", "9:00");
-	        jsonOneData.put("workEnd", "18:00");
+	        jsonOneData.put("workEnd", "23:00");
 	        jsonOneData.put("workTime", 8);
 	        jsonOneData.put("salaryUp", 0);
+	        jsonOneData.put("restCount", 0);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -114,19 +115,19 @@ public class JsonParse {
 			JSONArray jsonDayArray = jsonMonth.getJSONArray("monthlist");
 			boolean changed = true;
 			for (int i = 0; i < jsonDayArray.length(); i++) {
-				JSONObject jsonDay = jsonDayArray.getJSONObject(i);
-				System.out.println(jsonDay.getString("workDay") +"前と後ろの区別は："+jsonDayData
-						.getString("workDay"));
+				JSONObject jsonDay = jsonDayArray.getJSONObject(i);				
 				if (jsonDay.getString("workDay").equals(jsonDayData
 						.getString("workDay"))) {// 同じな日のデータを存在した場合、更新する
-					jsonDay = jsonDayData;
+					
+					jsonDay = CaluateDayTime(jsonDayData,workUnit,nightStart,nightEnd);
+					jsonDayArray.put(i,jsonDay);
 					changed = false;
 				}
 								
 			}
 			if(changed)
 			{
-				jsonDayArray.put(jsonDayData);
+				jsonDayArray.put(CaluateDayTime(jsonDayData,workUnit,nightStart,nightEnd));
 			}
 			/*勤務時間(totalTime):今月の全部勤務時間
 			 *　祝日、週末(weekendTime):週末と祝日の勤務時間
@@ -171,7 +172,57 @@ public class JsonParse {
 		}
 
 	}
+/**
+ * @param dayData
+ * @param timeUint
+ * @param nightStart
+ * @param nightEnd
+ * @return
+ */
 
+public static JSONObject CaluateDayTime(JSONObject dayData,int timeUint,String nightStart,String nightEnd)
+{
+		double workTime = 0;
+	try {
+		String workStart = dayData.getString("workStart");
+		String workEnd = dayData.getString("workEnd");
+		int restCount = dayData.getInt("restCount");
+		if(restCount == 0)
+		{
+			workTime =KtHoliday.calTime(workStart, workEnd,timeUint);
+		}else
+		{
+			JSONObject array = (JSONObject) dayData.get("restTimeList");
+			for(int i = 0;i<restCount;i++)
+			{
+				String start = "start"+(i+1);
+				String end = "end"+(i+1);
+				workEnd = array.getString(start);
+				workTime += KtHoliday.calTime(workStart, workEnd,timeUint);
+				workStart =  array.getString(end);
+			}
+		}
+		dayData.put("workTime", workTime);
+		/*
+		 * 深夜の計算ーーー＞日跨るはまだですが、徹夜した場合、二日に入力してください
+		 * */
+		double salaryUp = 0;
+		if(KtHoliday.calTime(nightStart,dayData.getString("workEnd"),timeUint)>0)
+		{
+			salaryUp += KtHoliday.calTime(nightStart,dayData.getString("workEnd"),timeUint);
+		}else if(KtHoliday.calTime(dayData.getString("workStart"),nightEnd,timeUint)>0)
+		{
+			salaryUp += KtHoliday.calTime(dayData.getString("workStart"),nightEnd,timeUint);
+		}
+		dayData.put("salaryUp", salaryUp);
+	} catch (JSONException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	return dayData;
+	
+}
 	/**
 	 * @param work
 	 * @param fileAddress
