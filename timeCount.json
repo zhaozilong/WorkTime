@@ -22,53 +22,22 @@
     ]
   },
   "201504": {
-    "totalTime": 32,
-    "NomalTime": 24,
-    "extraTime": 0,
-    "weekendTime": 8,
+    "totalTime": 14,
+    "NomalTime": 8,
+    "extraTime": 1,
+    "weekendTime": 0,
     "monthlist": [
       {
         "workStart": "9:00",
-        "workDay": "2015-04-07",
-        "workEnd": "18:00",
-        "workTime": 8,
-        "salaryUp": 0,
-        "restCount": 2,
-        "restTimeList": [
-          {
-            "start1": "12:00"
-          },
-          {
-            "end1": "14:00"
-          },
-          {
-            "strat2": "18:00"
-          },
-          {
-            "end2": "18:30"
-          }
-        ]
-      },
-      {
-        "workStart": "9:00",
-        "workDay": "2015-04-08",
-        "workEnd": "18:00",
-        "workTime": 8,
-        "salaryUp": 0
-      },
-      {
-        "workStart": "9:00",
-        "workDay": "2015-04-06",
-        "workEnd": "18:00",
-        "workTime": 8,
-        "salaryUp": 0
-      },
-      {
-        "workStart": "9:00",
-        "workDay": "2015-04-04",
-        "workEnd": "18:00",
-        "workTime": 8,
-        "salaryUp": 0
+        "restCount": 1,
+        "workDay": "2015-04-03",
+        "workEnd": "23:00",
+        "workTime": 14,
+        "salaryUp": 1,
+      "restTimeList":{
+        "strat1":"12:00",
+        "end1":"13:00"
+      }
       }
     ]
   },
