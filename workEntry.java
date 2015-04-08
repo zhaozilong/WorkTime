@@ -23,7 +23,6 @@ public class WorkEntry {
 		this.setWorkName(workName);
 		
 	}
-
 	public int getTimeUnit() {
 		return timeUnit;
 	}
